@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "node parser.js && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "vue-cli-service build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
