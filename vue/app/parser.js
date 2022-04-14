@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const main = async () => {
-  const paths = parseDirs('src/slack');
+  const paths = parseDirs('public/img/slack')[0];
   fs.writeFileSync('src/paths.json', JSON.stringify(paths));
   console.log('parser.js success');
 };
@@ -18,7 +18,7 @@ const parseDirs = (dirpath) => {
     if (dirent.isDirectory()) {
       dirs[dirent.name] = parseDirs(fp);
     } else {
-      results.push(fp);
+      results.push(fp.replace('public/', ''));
     }
   }
 
