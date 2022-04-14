@@ -17,6 +17,8 @@ const parseDirs = (dirpath) => {
     const fp = path.join(dirpath, dirent.name);
     if (dirent.isDirectory()) {
       dirs[dirent.name] = parseDirs(fp);
+    } else if (dirent.name === '.DS_Store') {
+      continue;
     } else {
       results.push(fp.replace('public/', ''));
     }

@@ -1,11 +1,13 @@
 <template>
   <v-col cols="3">
-    <v-card class="pa-2 d-flex" align="center" outlined tile>
-      <v-img :src="src" height="80" width="80" cover></v-img>
-      <v-card-title>
-        <v-row align="center" class="mx-0">: {{ img_name }} :</v-row>
-      </v-card-title>
-    </v-card>
+    <a :href="src" class="text-decoration-none" download>
+      <v-card class="pa-3 ma-1 d-flex" align="center" height="80" outlined tile>
+        <v-img :src="src" align="center" max-height="60" max-width="60"></v-img>
+        <v-card-title class="ml-4">
+          <v-row align="center" class="text-center">:{{ img_name }}:</v-row>
+        </v-card-title>
+      </v-card>
+    </a>
   </v-col>
 </template>
 
