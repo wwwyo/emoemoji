@@ -4,10 +4,16 @@
       <Header />
       <v-main>
         <v-container>
-          <v-row dense v-for="dir in displayDirNames" :key="dir" class="pa-5">
+          <v-row
+            dense
+            v-for="(name, dir) in directoryDict"
+            :key="dir"
+            class="pa-5"
+          >
             <h3
+              :id="dir"
               class="text-h3 v-col-12 text-center mb-1"
-              v-html="translator[dir] || translator['others']"
+              v-html="name"
             ></h3>
             <Card v-for="path in paths[dir]" :src="path" :key="path" cols="3" />
           </v-row>
@@ -18,6 +24,7 @@
 </template>
 
 <script>
+import { provide } from 'vue';
 import Header from '@/components/Header.vue';
 import Card from '@/components/Card.vue';
 import paths from '@/paths.json';
@@ -62,10 +69,17 @@ export default {
       task: '&#9997; タスク &#9997;',
       team: '&#128170; チーム &#128170;',
     };
+
+    const directoryDict = displayDirNames.reduce((dict, dir) => {
+      dict[dir] = translator[dir] || translator['other'];
+      return dict;
+    }, {});
+
+    provide('directoryDict', directoryDict);
+
     return {
-      displayDirNames,
+      directoryDict,
       paths,
-      translator,
     };
   },
 };
