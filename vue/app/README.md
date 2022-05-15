@@ -1,24 +1,23 @@
 # app
 
-## Project setup
-```
-npm install
+### Development
+
+```bash
+docker-compose up -d
 ```
 
-### Compiles and hot-reloads for development
-```
+### In Remote Container
+
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+# Deploy
+
+```bash
+gh-pages -d dist
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+### gh-pages
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+https://yuito118.github.io/emoemoji/
