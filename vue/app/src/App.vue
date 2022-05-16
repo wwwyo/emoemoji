@@ -12,7 +12,7 @@
           >
             <h3
               :id="dir"
-              class="text-h3 v-col-12 text-center mb-1"
+              class="text-h3 v-col-12 mb-1 d-flex justify-center"
               v-html="name"
             ></h3>
             <Card v-for="path in paths[dir]" :src="path" :key="path" cols="3" />
@@ -53,21 +53,30 @@ export default {
       'gaya',
     ];
     const translator = {
-      anger: '&#129324; おこ &#129324;',
-      business: '&#128526; 横文字 &#128526;',
-      club: '&#128572; クラブ &#128572;',
-      develop: '&#128187; 開発 &#128187;',
-      event: '&#127881; イベント &#127881;',
-      food: '&#129316; たべもの &#129316;',
-      gaya: '&#128125; ガヤ &#128125;',
-      greeting: '&#128515; あいさつ &#128515;',
-      humor: '&#128518; ユーモア &#128518;',
-      joy: '&#128525; いいね &#128525;',
-      others: '&#127773; &#127773; &#127773;',
-      pathos: '&#128557; ぴえん &#128557;',
-      reply: '&#129303; レスポンス &#129303;',
-      task: '&#9997; タスク &#9997;',
-      team: '&#128170; チーム &#128170;',
+      anger:
+        '<p class="rotate">&#129324;</p> おこ <p class="rotate-r">&#129324;</p>',
+      business:
+        '<p class="rotate">&#128526;</p> 横文字 <p class="rotate">&#128526;</p>',
+      club: '<p class="rotate">&#128572;</p> クラブ <p class="rotate-r">&#128572;</p>',
+      develop:
+        '<p class="rotate">&#128187;</p> 開発 <p class="rotate-r">&#128187;</p>',
+      event:
+        '<p class="rotate">&#127881;</p> イベント <p class="rotate-r">&#127881;</p>',
+      food: '<p class="rotate">&#129316;</p> たべもの <p class="rotate-r">&#129316;</p>',
+      gaya: '<p class="rotate">&#128125;</p> ガヤ <p class="rotate-r">&#128125;</p>',
+      greeting:
+        '<p class="rotate">&#128515;</p> あいさつ <p class="rotate-r">&#128515;</p>',
+      humor:
+        '<p class="rotate">&#128518;</p> ユーモア <p class="rotate-r">&#128518;</p>',
+      joy: '<p class="rotate">&#128525;</p> いいね <p class="rotate-r">&#128525;</p>',
+      others:
+        '<p class="rotate">&#127773;</p> <p class="rotate-r">&#127773;</p> <p class="rotate">&#127773;</p>',
+      pathos:
+        '<p class="rotate">&#128557;</p> ぴえん <p class="rotate-r">&#128557;</p>',
+      reply:
+        '<p class="rotate">&#129303;</p> レスポンス <p class="rotate-r">&#129303;</p>',
+      task: '<p class="rotate">&#9997;</p> タスク <p class="rotate-r">&#9997;</p>',
+      team: '<p class="rotate">&#128170;</p> チーム <p class="rotate-r">&#128170;</p>',
     };
 
     const directoryDict = displayDirNames.reduce((dict, dir) => {
@@ -84,3 +93,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.rotate {
+  animation: rotate-animation 1s linear infinite;
+}
+.rotate-r {
+  animation: rotate-animation 1s linear infinite;
+  animation-direction: reverse;
+}
+@keyframes rotate-animation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+</style>
