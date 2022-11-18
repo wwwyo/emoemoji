@@ -14,9 +14,7 @@ npm run serve
 
 # Deploy
 
-```bash
-gh-pages -d dist
-```
+push or merge to main
 
 ### gh-pages
 
