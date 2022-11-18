@@ -8,9 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: ./vue/app
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
@@ -28,16 +25,17 @@ jobs:
         run: |
           npm ci
           npm run build
+        working-directory: ./vue/app
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+          publish_dir: ./vue/app/dist
 
       - name: Slack Notification on Success
-        if: success()
         uses: rtCamp/action-slack-notify@v2.0.2
+        if: success()
         env:
           SLACK_TITLE: Deploy Success
           SLACK_COLOR: good
@@ -49,3 +47,4 @@ jobs:
         env:
           SLACK_TITLE: Deploy Failure
           SLACK_COLOR: danger
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
