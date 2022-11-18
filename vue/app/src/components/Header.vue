@@ -4,9 +4,9 @@
     <v-container>
       <v-app-bar-title>
         <div class="d-flex flex-row">
-          &#x1F618;&#x1F928;&#x1F60E;
+          <p class="emojis" v-html="emoji.lEmojis.join('')"></p>
           <v-img :src="logo" width="90" height="35"></v-img>
-          &#x1F618;&#x1F928;&#x1F60E;
+          <p class="emojis" v-html="emoji.rEmojis.join('')"></p>
         </div>
       </v-app-bar-title>
     </v-container>
@@ -25,7 +25,7 @@
           <a :href="'#' + dir" class="text-decoration-none">
             <v-list-item-title
               v-html="name"
-              class="text-subtitle-1"
+              class="text-subtitle-1 d-flex"
             ></v-list-item-title>
           </a>
         </v-list-item>
@@ -35,14 +35,23 @@
 </template>
 
 <script>
-import { ref, inject } from 'vue';
+import { ref, inject, reactive } from 'vue';
+import { Emoji } from '@/models/Emoji';
+
 export default {
   setup() {
+    const emoji = reactive(new Emoji());
+
     const directoryDict = inject('directoryDict');
     const logo = require('@/assets/img/logo_w.png');
     const drawer = ref(false);
 
+    const emojiTimer = setInterval(() => {
+      emoji.transition();
+    }, 300);
+
     return {
+      emoji,
       directoryDict,
       logo,
       drawer,
@@ -58,5 +67,8 @@ export default {
   &__drawer {
     position: fixed !important;
   }
+}
+.emojis {
+  letter-spacing: 12px;
 }
 </style>
