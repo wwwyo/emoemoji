@@ -4,9 +4,9 @@
     <v-container>
       <v-app-bar-title>
         <div class="d-flex flex-row">
-          <p v-html="lEmojis.join('')"></p>
+          <p class="emojis" v-html="emoji.lEmojis.join('')"></p>
           <v-img :src="logo" width="90" height="35"></v-img>
-          <p v-html="rEmojis.join('')"></p>
+          <p class="emojis" v-html="emoji.rEmojis.join('')"></p>
         </div>
       </v-app-bar-title>
     </v-container>
@@ -35,24 +35,23 @@
 </template>
 
 <script>
-import { ref, inject } from 'vue';
+import { ref, inject, reactive } from 'vue';
 import { Emoji } from '@/models/Emoji';
 
 export default {
   setup() {
-    const emoji = new Emoji();
-    const lEmojis = ref(emoji.lEmojis);
-    const rEmojis = ref(emoji.rEmojis);
+    const emoji = reactive(new Emoji());
 
     const directoryDict = inject('directoryDict');
     const logo = require('@/assets/img/logo_w.png');
     const drawer = ref(false);
 
-    const emojiTimer = setInterval(() => emoji.transition(), 500);
+    const emojiTimer = setInterval(() => {
+      emoji.transition();
+    }, 300);
 
     return {
-      lEmojis,
-      rEmojis,
+      emoji,
       directoryDict,
       logo,
       drawer,
@@ -68,5 +67,8 @@ export default {
   &__drawer {
     position: fixed !important;
   }
+}
+.emojis {
+  letter-spacing: 12px;
 }
 </style>

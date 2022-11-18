@@ -55,7 +55,7 @@ export class Emoji {
   }
 
   transition() {
-    this.exchangeEmoji('l');
-    this.exchangeEmoji('r');
+    this.exchangeEmoji('l'), this.exchangeEmoji('r');
+    return [this.lEmojis, this.rEmojis];
   }
 }
